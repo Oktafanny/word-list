@@ -22,7 +22,7 @@
         {% if msg %}
             alert("{{msg}}");
         {% endif %}
-        let words = {{ words | tojson }};
+        let words = {{ words | tojson }}; 
         let word_list = [];
         for (let i = 0; i < words.length; i++){
             word_list.push(words[i].word)

@@ -53,16 +53,14 @@ def detail(keyword):
     response = requests.get(url)
     definitions = response.json()
     if not definitions:
-        return redirect(url_for(
-            'main',
-            msg=f'Could not find the word, "{keyword}"'
-        ))
+        return render_template('error.html',keyword=keyword)
     if type(definitions[0]) is str:
-        suggestions = ','.join(definitions)
-        return redirect(url_for(
-            'main',
-            msg=f'Could not find the word, "{keyword}", did you mean one of these words: {suggestions}'
-        ))
+        suggestions = definitions
+        return render_template('suggestion.html',keyword=keyword,suggestions=suggestions)
+        # return redirecti(url_for(
+        #     'main',
+        #     msg=f'Could not find the word, "{keyword}", did you mean one of these words: {suggestions}'
+        # ))
     status = request.args.get('status_give', 'new')
     return render_template(
         'detail.html', 
